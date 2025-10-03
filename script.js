@@ -1,3 +1,28 @@
+// Audio player functionality
+const audio = new Audio('ssstik.io_1759520762289.mp3'); // Ganti dengan: new Audio('music/lagu-kamu.mp3')
+const playBtn = document.getElementById('playBtn');
+const volumeSlider = document.getElementById('volumeSlider');
+
+// Set initial volume
+audio.volume = 0.5;
+
+playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸';
+    } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+    }
+});
+
+volumeSlider.addEventListener('input', (e) => {
+    audio.volume = e.target.value / 100;
+});
+
+// Auto loop
+audio.loop = true;
+
 // Floating hearts animation
 function createHeart() {
     const heart = document.createElement('div');
