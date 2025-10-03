@@ -8,6 +8,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
     background: #000;
+    touch-action: pan-y;
 }
 
 .slide {
@@ -108,6 +109,12 @@ body {
 /* Slide 2 - Memory Gallery */
 #slide2 {
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.gallery-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 .gallery {
@@ -355,4 +362,103 @@ body {
 @keyframes bounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .gallery-wrapper {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 1rem 0;
+    }
+
+    .gallery-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(3, 90vw);
+        gap: 1rem;
+        padding: 0 5vw;
+        width: max-content;
+    }
+
+    .photo-card {
+        scroll-snap-align: center;
+        width: 90vw;
+        max-width: none;
+        margin: 0;
+        height: 400px;
+    }
+
+    .photo-placeholder {
+        height: 280px;
+    }
+    
+    .content h1 {
+        font-size: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .content p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    .love-letter {
+        max-width: 90%;
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+
+    .love-letter h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .love-letter p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .audio-player {
+        top: 15px;
+        padding: 10px 15px;
+        gap: 10px;
+    }
+
+    .play-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .volume-slider {
+        width: 70px;
+    }
+    
+    .volume-icon {
+        font-size: 1.1rem;
+    }
+
+    .nav-dots {
+        right: 15px;
+        gap: 12px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .scroll-hint {
+        bottom: 20px;
+        font-size: 0.8rem;
+    }
+
+    .heart {
+        font-size: 1.5rem;
+    }
 }
