@@ -1,5 +1,5 @@
 // Audio player functionality
-const audio = new Audio('ssstik.io_1759520762289.mp3'); // Ganti dengan: new Audio('music/lagu-kamu.mp3')
+const audio = new Audio('ssstik.io_1759520762289.mp3');
 const playBtn = document.getElementById('playBtn');
 const volumeSlider = document.getElementById('volumeSlider');
 
@@ -38,6 +38,36 @@ function createHeart() {
 
 setInterval(createHeart, 500);
 
+// Auto scroll gallery on mobile
+let galleryAutoScroll;
+let galleryScrollIndex = 0;
+const gallery = document.querySelector('.gallery-wrapper');
+
+function startGalleryAutoScroll() {
+    if (window.innerWidth <= 768 && gallery) {
+        galleryAutoScroll = setInterval(() => {
+            const cards = document.querySelectorAll('.photo-card');
+            if (cards.length > 0) {
+                galleryScrollIndex = (galleryScrollIndex + 1) % cards.length;
+                const scrollAmount = galleryScrollIndex * (window.innerWidth * 0.9 + 16); // 90vw + gap
+                gallery.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }, 3000); // Auto scroll setiap 3 detik
+    }
+}
+
+function stopGalleryAutoScroll() {
+    if (galleryAutoScroll) {
+        clearInterval(galleryAutoScroll);
+    }
+}
+
+// Start auto scroll when on slide 2
+let lastSlide = -1;
+
 // Smooth scroll navigation
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
@@ -64,6 +94,14 @@ window.addEventListener('scroll', () => {
         const slideHeight = window.innerHeight;
         currentSlide = Math.round(scrollPosition / slideHeight);
         updateDots();
+        
+        // Control gallery auto scroll
+        if (currentSlide === 1 && lastSlide !== 1) {
+            startGalleryAutoScroll();
+        } else if (currentSlide !== 1 && lastSlide === 1) {
+            stopGalleryAutoScroll();
+        }
+        lastSlide = currentSlide;
     }, 100);
 });
 
@@ -81,3 +119,9 @@ window.addEventListener('wheel', (e) => {
     
     setTimeout(() => isThrottled = false, 1000);
 });
+
+// Stop auto scroll when user touches gallery
+if (gallery) {
+    gallery.addEventListener('touchstart', stopGalleryAutoScroll);
+    gallery.addEventListener('mousedown', stopGalleryAutoScroll);
+}
