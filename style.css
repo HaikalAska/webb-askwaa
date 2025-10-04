@@ -1,17 +1,31 @@
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
+    overflow-y: scroll;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     background: #000;
-    touch-action: pan-y;
+    margin: 0;
+    padding: 0;
 }
 
 .slide {
+    min-height: 100vh;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -21,7 +35,17 @@ body {
     overflow: hidden;
 }
 
-/* Slide 1 - Romantic Introduction */
+.content {
+    text-align: center;
+    z-index: 10;
+    color: white;
+    padding: 2rem;
+}
+
+
+/* ============================================
+   SLIDE 1 - ROMANTIC INTRODUCTION
+   ============================================ */
 #slide1 {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     animation: gradientShift 8s ease infinite;
@@ -64,13 +88,6 @@ body {
     }
 }
 
-.content {
-    text-align: center;
-    z-index: 10;
-    color: white;
-    padding: 2rem;
-}
-
 .content h1 {
     font-size: 4rem;
     margin-bottom: 1rem;
@@ -106,26 +123,51 @@ body {
     }
 }
 
-/* Slide 2 - Memory Gallery */
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.9rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+
+/* ============================================
+   SLIDE 2 - MEMORY GALLERY
+   ============================================ */
 #slide2 {
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
 }
 
 .gallery-wrapper {
     width: 100%;
-    overflow: hidden;
-    position: relative;
+    max-width: 900px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.gallery-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 250px);
+    display: flex;
     gap: 2rem;
-    z-index: 10;
+    padding: 1rem 0;
 }
 
 .photo-card {
-    width: 250px;
+    min-width: 250px;
+    flex-shrink: 0;
     height: 300px;
     background: white;
     border-radius: 15px;
@@ -138,17 +180,6 @@ body {
 .photo-card:nth-child(1) { animation-delay: 0.1s; }
 .photo-card:nth-child(2) { animation-delay: 0.2s; }
 .photo-card:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes popIn {
-    from {
-        opacity: 0;
-        transform: scale(0.5) rotate(-10deg);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-    }
-}
 
 .photo-card:hover {
     transform: translateY(-10px) rotate(2deg);
@@ -163,7 +194,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
     margin-bottom: 10px;
     overflow: hidden;
 }
@@ -180,20 +210,203 @@ body {
     font-weight: 600;
     font-size: 1.1rem;
 }
-
-/* Slide 3 - Love Message */
+/* ============================================
+   SLIDE 3 - TIMELINE/MEMORIES
+   ============================================ */
 #slide3 {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.timeline-container {
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem;
+    scrollbar-width: none;
+}
+
+.timeline-container::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-title {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    animation: fadeInDown 0.8s ease;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.95);
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    animation: slideInLeft 0.6s ease both;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+}
+
+.question-answer {
+    margin-top: 0.8rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+}
+
+.question-card:nth-child(2) { animation-delay: 0.2s; }
+.question-card:nth-child(3) { animation-delay: 0.4s; }
+.question-card:nth-child(4) { animation-delay: 0.6s; }
+
+.question-header {
+    color: #e91e63;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.question-answer {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+
+/* ============================================
+   SLIDE 4 - REASONS WHY I LOVE YOU
+   ============================================ */
+#slide4 {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+.reasons-container {
+    max-width: 900px;
+    width: 100%;
+    padding: 2rem;
+}
+
+.reasons-title {
+    text-align: center;
+    color: white;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    animation: fadeInDown 0.8s ease;
+}
+
+.reasons-wrapper {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    scrollbar-width: none; /* Untuk Firefox */
+}
+
+.reasons-wrapper::-webkit-scrollbar {
+    display: none; /* Untuk Chrome, Safari, Edge */
+}
+
+.reasons-grid {
+    display: inline-flex;
+    gap: 1.5rem;
+    padding: 1rem 0.5rem;
+}
+
+.reasons-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.reasons-grid::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+.reasons-grid::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.7);
+    border-radius: 4px;
+}
+
+.reason-card {
+    min-width: 250px;
+    max-width: 250px;
+    background: rgba(255,255,255,0.95);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    animation: popIn 0.6s ease both;
+    flex-shrink: 0;
+}
+
+.reason-card:nth-child(1) { animation-delay: 0.1s; }
+.reason-card:nth-child(2) { animation-delay: 0.2s; }
+.reason-card:nth-child(3) { animation-delay: 0.3s; }
+.reason-card:nth-child(4) { animation-delay: 0.4s; }
+.reason-card:nth-child(5) { animation-delay: 0.5s; }
+.reason-card:nth-child(6) { animation-delay: 0.6s; }
+
+.reason-card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.reason-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.reason-text {
+    color: #333;
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+
+/* ============================================
+   SLIDE 5 - LOVE MESSAGE
+   ============================================ */
+#slide5 {
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    padding: 2rem 0;
 }
 
 .love-letter {
     max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
     background: white;
     padding: 3rem;
     border-radius: 20px;
     box-shadow: 0 20px 80px rgba(0,0,0,0.2);
     animation: slideIn 1s ease;
     position: relative;
+    scrollbar-width: none; /* Untuk Firefox */
+}
+
+.love-letter::-webkit-scrollbar {
+    display: none; /* Untuk Chrome, Safari, Edge */
+}
+
+.love-letter::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.love-letter::-webkit-scrollbar-thumb {
+    background: #e91e63;
+    border-radius: 10px;
 }
 
 @keyframes slideIn {
@@ -229,7 +442,133 @@ body {
     font-size: 1.3rem;
 }
 
-/* Audio Player */
+/* ============================================
+   SLIDE 6 - PHOTO GALLERY
+   ============================================ */
+#slide6 {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#slide6 .content {
+    position: relative;
+    width: 700px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-title {
+    position: relative;
+    color: white;
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+    z-index: 10;
+    font-weight: bold;
+    margin: 0;
+}
+
+.photo-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.grid-photo {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.grid-photo:hover {
+    transform: scale(1.15);
+    z-index: 20;
+}
+
+.grid-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Posisi foto melingkar - 10 foto random & nyerong */
+.grid-photo:nth-child(1) {
+    top: 15%;
+    left: -10%;
+    transform: rotate(-15deg);
+}
+
+.grid-photo:nth-child(2) {
+    top: -5%;
+    left: 15%;
+    transform: rotate(8deg);
+}
+
+.grid-photo:nth-child(3) {
+    top: -8%;
+    left: 50%;
+    transform: translateX(-50%) rotate(-12deg);
+}
+
+.grid-photo:nth-child(4) {
+    top: -5%;
+    right: 15%;
+    transform: rotate(10deg);
+}
+
+.grid-photo:nth-child(5) {
+    top: 15%;
+    right: -10%;
+    transform: rotate(18deg);
+}
+
+.grid-photo:nth-child(6) {
+    bottom: 15%;
+    right: -8%;
+    transform: rotate(-8deg);
+}
+
+.grid-photo:nth-child(7) {
+    bottom: -5%;
+    right: 18%;
+    transform: rotate(-10deg);
+}
+
+.grid-photo:nth-child(8) {
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%) rotate(15deg);
+}
+
+.grid-photo:nth-child(9) {
+    bottom: -5%;
+    left: 18%;
+    transform: rotate(-12deg);
+}
+
+.grid-photo:nth-child(10) {
+    bottom: 15%;
+    left: -8%;
+    transform: rotate(14deg);
+}
+
+.grid-photo:hover {
+    transform: scale(1.15) rotate(0deg);
+    z-index: 20;
+}
+
+/* ============================================
+   AUDIO PLAYER
+   ============================================ */
 .audio-player {
     position: fixed;
     top: 30px;
@@ -278,187 +617,88 @@ body {
 }
 
 .volume-icon {
-    font-size: 1.3rem;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    font-size: 1.2rem;
+
 }
 
-.volume-slider {
-    width: 100px;
-    height: 5px;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.3);
-    outline: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-}
+    /* ============================================
+   NAVIGATION DOTS
+   ============================================ */
 
-.volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
 
-.volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-}
-
-.volume-slider::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.volume-slider::-moz-range-thumb:hover {
-    transform: scale(1.2);
-}
-
-/* Navigation */
-.nav-dots {
+   .nav-dots {
     position: fixed;
     right: 30px;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 100;
+    z-index: 999;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
+    border: none;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .dot.active {
-    background: white;
-    transform: scale(1.5);
+    background: rgba(255, 255, 255, 0.9);
+    width: 12px;
+    height: 12px;
 }
 
-.scroll-hint {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 0.9rem;
-    animation: bounce 2s infinite;
+/* ============================================
+   CUSTOM SCROLLBAR - BULAT BULAT
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-10px); }
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-/* Mobile Responsive */
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
 @media (max-width: 768px) {
     .gallery-wrapper {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding: 1rem 0;
+        width: 100vw;
+        margin-left: -2rem;
+        padding-left: 2rem;
     }
-
-    .gallery-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-
+    
     .gallery {
-        grid-template-columns: repeat(3, 90vw);
-        gap: 1rem;
-        padding: 0 5vw;
-        width: max-content;
+        padding-right: 2rem;
     }
-
+    
     .photo-card {
-        scroll-snap-align: center;
-        width: 90vw;
-        max-width: none;
-        margin: 0;
-        height: 400px;
-    }
-
-    .photo-placeholder {
-        height: 280px;
-    }
-    
-    .content h1 {
-        font-size: 2rem;
-        padding: 0 1rem;
-    }
-    
-    .content p {
-        font-size: 1.1rem;
-        padding: 0 1rem;
-    }
-
-    .love-letter {
-        max-width: 90%;
-        padding: 2rem 1.5rem;
-        margin: 1rem;
-    }
-
-    .love-letter h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-    }
-    
-    .love-letter p {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-
-    .audio-player {
-        top: 15px;
-        padding: 10px 15px;
-        gap: 10px;
-    }
-
-    .play-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-
-    .volume-slider {
-        width: 70px;
-    }
-    
-    .volume-icon {
-        font-size: 1.1rem;
-    }
-
-    .nav-dots {
-        right: 15px;
-        gap: 12px;
-    }
-
-    .dot {
-        width: 10px;
-        height: 10px;
-    }
-
-    .scroll-hint {
-        bottom: 20px;
-        font-size: 0.8rem;
-    }
-
-    .heart {
-        font-size: 1.5rem;
+        min-width: 80vw;
+        max-width: 80vw;
     }
 }
