@@ -1,0 +1,749 @@
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    background: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.slide {
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.content {
+    text-align: center;
+    z-index: 10;
+    color: white;
+    padding: 2rem;
+}
+
+
+/* ============================================
+   SLIDE 1 - ROMANTIC INTRODUCTION
+   ============================================ */
+#slide1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    50% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+}
+
+.hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0;
+    animation: floatHeart 6s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.content h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+    animation: fadeInDown 1s ease;
+}
+
+.content p {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease 0.5s both;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.9rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+
+/* ============================================
+   SLIDE 2 - MEMORY GALLERY
+   ============================================ */
+#slide2 {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.gallery-wrapper {
+    width: 100%;
+    max-width: 900px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.gallery-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.photo-card {
+    min-width: 250px;
+    flex-shrink: 0;
+    height: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: popIn 0.6s ease both;
+}
+
+.photo-card:nth-child(1) { animation-delay: 0.1s; }
+.photo-card:nth-child(2) { animation-delay: 0.2s; }
+.photo-card:nth-child(3) { animation-delay: 0.3s; }
+
+.photo-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-caption {
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+/* ============================================
+   SLIDE 3 - TIMELINE/MEMORIES
+   ============================================ */
+#slide3 {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.timeline-container {
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem;
+    scrollbar-width: none;
+}
+
+.timeline-container::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-title {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    animation: fadeInDown 0.8s ease;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.95);
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    animation: slideInLeft 0.6s ease both;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+}
+
+.question-answer {
+    margin-top: 0.8rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+}
+
+.question-card:nth-child(2) { animation-delay: 0.2s; }
+.question-card:nth-child(3) { animation-delay: 0.4s; }
+.question-card:nth-child(4) { animation-delay: 0.6s; }
+
+.question-header {
+    color: #e91e63;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.question-answer {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+
+/* ============================================
+   SLIDE 4 - REASONS WHY I LOVE YOU
+   ============================================ */
+#slide4 {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+.reasons-container {
+    max-width: 900px;
+    width: 100%;
+    padding: 2rem;
+}
+
+.reasons-title {
+    text-align: center;
+    color: white;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    animation: fadeInDown 0.8s ease;
+}
+
+.reasons-wrapper {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    scrollbar-width: none; /* Untuk Firefox */
+}
+
+.reasons-wrapper::-webkit-scrollbar {
+    display: none; /* Untuk Chrome, Safari, Edge */
+}
+
+.reasons-grid {
+    display: inline-flex;
+    gap: 1.5rem;
+    padding: 1rem 0.5rem;
+}
+
+.reasons-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.reasons-grid::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+.reasons-grid::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.7);
+    border-radius: 4px;
+}
+
+.reason-card {
+    min-width: 250px;
+    max-width: 250px;
+    background: rgba(255,255,255,0.95);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    animation: popIn 0.6s ease both;
+    flex-shrink: 0;
+}
+
+.reason-card:nth-child(1) { animation-delay: 0.1s; }
+.reason-card:nth-child(2) { animation-delay: 0.2s; }
+.reason-card:nth-child(3) { animation-delay: 0.3s; }
+.reason-card:nth-child(4) { animation-delay: 0.4s; }
+.reason-card:nth-child(5) { animation-delay: 0.5s; }
+.reason-card:nth-child(6) { animation-delay: 0.6s; }
+
+.reason-card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.reason-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.reason-text {
+    color: #333;
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+
+/* ============================================
+   SLIDE 5 - LOVE MESSAGE
+   ============================================ */
+#slide5 {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    padding: 2rem 0;
+}
+
+.love-letter {
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+    animation: slideIn 1s ease;
+    position: relative;
+    scrollbar-width: none; /* Untuk Firefox */
+}
+
+.love-letter::-webkit-scrollbar {
+    display: none; /* Untuk Chrome, Safari, Edge */
+}
+
+.love-letter::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.love-letter::-webkit-scrollbar-thumb {
+    background: #e91e63;
+    border-radius: 10px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotateX(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotateX(0deg);
+    }
+}
+
+.love-letter h2 {
+    color: #e91e63;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.love-letter p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.signature {
+    text-align: right;
+    font-style: italic;
+    color: #e91e63;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+
+/* =========================================
+   SLIDE 6 BACKGROUND AUTO SCROLL (TAMBAHAN)
+   ========================================= */
+
+#slide6 {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
+
+.bg-rows {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    z-index: 1;
+    opacity: 0.55;
+}
+
+.bg-row {
+    width: 100%;
+    overflow: hidden;
+}
+
+.bg-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+}
+
+.bg-card {
+    width: 260px;
+    height: 170px;
+    border-radius: 22px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.bg-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ARAH GERAK */
+.bg-row.right .bg-track {
+    animation: scrollRight 60s linear infinite;
+}
+
+.bg-row.left .bg-track {
+    animation: scrollLeft 60s linear infinite;
+}
+
+@keyframes scrollRight {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+@keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* CENTER CARD */
+.center-card {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    z-index: 5;
+
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(14px);
+    padding: 40px 70px;
+    border-radius: 30px;
+    text-align: center;
+    color: #fff;
+}
+
+/* =========================================
+   SLIDE 7 VIDEO (TAMBAHAN)
+   ========================================= */
+
+#slide7 {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.video-wrapper video {
+    width: 70vw;
+    max-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.video-title {
+    color: white;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+}
+
+
+/* Posisi foto melingkar - 10 foto random & nyerong */
+.grid-photo:nth-child(1) {
+    top: 15%;
+    left: -10%;
+    transform: rotate(-15deg);
+}
+
+.grid-photo:nth-child(2) {
+    top: -5%;
+    left: 15%;
+    transform: rotate(8deg);
+}
+
+.grid-photo:nth-child(3) {
+    top: -8%;
+    left: 50%;
+    transform: translateX(-50%) rotate(-12deg);
+}
+
+.grid-photo:nth-child(4) {
+    top: -5%;
+    right: 15%;
+    transform: rotate(10deg);
+}
+
+.grid-photo:nth-child(5) {
+    top: 15%;
+    right: -10%;
+    transform: rotate(18deg);
+}
+
+.grid-photo:nth-child(6) {
+    bottom: 15%;
+    right: -8%;
+    transform: rotate(-8deg);
+}
+
+.grid-photo:nth-child(7) {
+    bottom: -5%;
+    right: 18%;
+    transform: rotate(-10deg);
+}
+
+.grid-photo:nth-child(8) {
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%) rotate(15deg);
+}
+
+.grid-photo:nth-child(9) {
+    bottom: -5%;
+    left: 18%;
+    transform: rotate(-12deg);
+}
+
+.grid-photo:nth-child(10) {
+    bottom: 15%;
+    left: -8%;
+    transform: rotate(14deg);
+}
+
+.grid-photo:hover {
+    transform: scale(1.15) rotate(0deg);
+    z-index: 20;
+}
+
+/* ============================================
+   AUDIO PLAYER
+   ============================================ */
+.audio-player {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.play-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-icon {
+    font-size: 1.2rem;
+
+}
+
+    /* ============================================
+   NAVIGATION DOTS
+   ============================================ */
+
+
+   .nav-dots {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.dot.active {
+    background: rgba(255, 255, 255, 0.9);
+    width: 12px;
+    height: 12px;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR - BULAT BULAT
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .gallery-wrapper {
+        width: 100vw;
+        margin-left: -2rem;
+        padding-left: 2rem;
+    }
+    
+    .gallery {
+        padding-right: 2rem;
+    }
+    
+    .photo-card {
+        min-width: 80vw;
+        max-width: 80vw;
+    }
+}
